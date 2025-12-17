@@ -2,6 +2,8 @@
 package com.moviles.proyectofinal
 
 import android.content.Intent
+import androidx.core.content.FileProvider
+import java.io.File
 import android.os.Bundle
 import android.view.*
 import android.widget.Button
@@ -47,16 +49,9 @@ class BackupFragment : Fragment() {
                         • Guardarlo en otro lugar
                     """.trimIndent()
 
-                    // Abrir selector para compartir el archivo
+                    // Abrir selector para compartir el archivo usando FileProvider
                     try {
-                        val shareIntent = repository.getDriveService().shareBackupFile(backupFile)
-                        startActivity(Intent.createChooser(shareIntent, "Respaldar archivo en..."))
-                        
-                        Toast.makeText(
-                            requireContext(),
-                            "Puedes subir el archivo a Drive desde el selector",
-                            Toast.LENGTH_LONG
-                        ).show()
+                        shareBackup(backupFile)
                     } catch (e: Exception) {
                         txtResultado.text = "Error al compartir: ${e.message}"
                     }
@@ -64,6 +59,24 @@ class BackupFragment : Fragment() {
                     txtResultado.text = "⚠️ No hay datos para respaldar o ocurrió un error."
                 }
             }
+        }
+    }
+
+    private fun shareBackup(file: File) {
+        try {
+            val authority = "${requireContext().packageName}.provider"
+            val uri = FileProvider.getUriForFile(requireContext(), authority, file)
+
+            val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                type = "application/json"
+                putExtra(Intent.EXTRA_STREAM, uri)
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            }
+
+            startActivity(Intent.createChooser(shareIntent, "Guardar respaldo en..."))
+        } catch (e: Exception) {
+            Toast.makeText(requireContext(), "Error preparando envío: ${e.message}", Toast.LENGTH_LONG).show()
+            e.printStackTrace()
         }
     }
 

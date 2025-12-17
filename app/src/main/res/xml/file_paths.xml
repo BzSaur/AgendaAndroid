@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<paths>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
     <files-path name="backup_files" path="backups/" />
     <files-path name="internal_files" path="." />
+    <!-- Permite compartir archivos creados en getExternalFilesDir() -->
+    <external-files-path name="external_files" path="." />
 </paths>

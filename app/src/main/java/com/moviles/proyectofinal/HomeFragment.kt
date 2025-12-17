@@ -17,14 +17,17 @@ import java.util.*
 
 class HomeFragment : Fragment() {
 
-    private lateinit var repository: EventoRepository
     private lateinit var adapterHoy: EventoEntityAdapter
     private lateinit var adapterSemana: EventoEntityAdapter
-    
+    private lateinit var adapterFuturos: EventoEntityAdapter
+
     private lateinit var recyclerHoy: RecyclerView
     private lateinit var recyclerSemana: RecyclerView
+    private lateinit var recyclerFuturos: RecyclerView
+
     private lateinit var txtNoEventosHoy: TextView
     private lateinit var txtNoEventosSemana: TextView
+    private lateinit var txtNoEventosFuturos: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,28 +37,31 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        repository = EventoRepository(requireContext())
-        
         // Inicializar vistas
         recyclerHoy = view.findViewById(R.id.recyclerEventosHoy)
         recyclerSemana = view.findViewById(R.id.recyclerEventosSemana)
+        recyclerFuturos = view.findViewById(R.id.recyclerEventosFuturos)
+
         txtNoEventosHoy = view.findViewById(R.id.txtNoEventosHoy)
         txtNoEventosSemana = view.findViewById(R.id.txtNoEventosSemana)
-        
+        txtNoEventosFuturos = view.findViewById(R.id.txtNoEventosFuturos)
+
         // Configurar RecyclerViews
         recyclerHoy.layoutManager = LinearLayoutManager(requireContext())
         recyclerSemana.layoutManager = LinearLayoutManager(requireContext())
+        recyclerFuturos.layoutManager = LinearLayoutManager(requireContext())
 
-        // Crear adapters con referencia al FragmentManager
-        adapterHoy = EventoEntityAdapter(emptyList(), childFragmentManager) {
-            loadEventos()
-        }
-        adapterSemana = EventoEntityAdapter(emptyList(), childFragmentManager) {
-            loadEventos()
-        }
-        
+        // Función auxiliar para recargar
+        val onUpdate = { loadEventos() }
+
+        // Crear adapters
+        adapterHoy = EventoEntityAdapter(emptyList(), childFragmentManager, onUpdate)
+        adapterSemana = EventoEntityAdapter(emptyList(), childFragmentManager, onUpdate)
+        adapterFuturos = EventoEntityAdapter(emptyList(), childFragmentManager, onUpdate)
+
         recyclerHoy.adapter = adapterHoy
         recyclerSemana.adapter = adapterSemana
+        recyclerFuturos.adapter = adapterFuturos
 
         // Cargar eventos
         loadEventos()
@@ -63,59 +69,69 @@ class HomeFragment : Fragment() {
 
     private fun loadEventos() {
         val eventoDao = AppDatabase.getDatabase(requireContext()).eventoDao()
-        
+
         viewLifecycleOwner.lifecycleScope.launch {
             eventoDao.getAllEventos().collectLatest { eventosEntity ->
-                // Separar eventos por fecha
-                val (eventosHoy, eventosSemana) = separarEventosPorFecha(eventosEntity)
-                
-                // Actualizar adapter de Hoy
-                adapterHoy.updateData(eventosHoy)
-                txtNoEventosHoy.visibility = if (eventosHoy.isEmpty()) View.VISIBLE else View.GONE
-                
-                // Actualizar adapter de Esta Semana
-                adapterSemana.updateData(eventosSemana)
-                txtNoEventosSemana.visibility = if (eventosSemana.isEmpty()) View.VISIBLE else View.GONE
+                // Separar eventos en 3 listas
+                val (hoy, semana, futuros) = separarEventosPorFecha(eventosEntity)
+
+                // Actualizar UI Hoy
+                adapterHoy.updateData(hoy)
+                txtNoEventosHoy.visibility = if (hoy.isEmpty()) View.VISIBLE else View.GONE
+
+                // Actualizar UI Semana
+                adapterSemana.updateData(semana)
+                txtNoEventosSemana.visibility = if (semana.isEmpty()) View.VISIBLE else View.GONE
+
+                // Actualizar UI Futuros
+                adapterFuturos.updateData(futuros)
+                txtNoEventosFuturos.visibility = if (futuros.isEmpty()) View.VISIBLE else View.GONE
             }
         }
     }
-    
-    private fun separarEventosPorFecha(eventos: List<EventoEntity>): Pair<List<EventoEntity>, List<EventoEntity>> {
+
+    // Devuelve Triple: (Hoy, Semana, Futuros)
+    private fun separarEventosPorFecha(eventos: List<EventoEntity>): Triple<List<EventoEntity>, List<EventoEntity>, List<EventoEntity>> {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val calendar = Calendar.getInstance()
-        
-        // Fecha de hoy
-        val hoy = dateFormat.format(calendar.time)
-        
-        // Inicio de la semana (lunes)
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
-        val inicioSemana = calendar.time
-        
-        // Fin de la semana (domingo)
-        calendar.add(Calendar.DAY_OF_WEEK, 6)
-        val finSemana = calendar.time
-        
-        val eventosHoy = mutableListOf<EventoEntity>()
-        val eventosSemana = mutableListOf<EventoEntity>()
-        
+
+        // Normalizar "hoy" para comparar solo fechas (sin horas)
+        val hoyStr = dateFormat.format(calendar.time)
+        val hoyDate = dateFormat.parse(hoyStr) ?: Date()
+
+        // Calcular fin de semana (Domingo)
+        calendar.time = hoyDate
+        // Si hoy es domingo, el fin de esta semana es hoy. Si es lunes, faltan 6 días, etc.
+        // Una lógica simple: "Esta semana" = próximos 7 días o hasta el domingo.
+        // Usaremos: Semana = > Hoy Y <= Domingo de esta semana
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)
+        // Asegurar que si hoy es Domingo, el calendar no nos de el domingo pasado
+        if (calendar.time.before(hoyDate)) {
+            calendar.add(Calendar.WEEK_OF_YEAR, 1)
+        }
+        val finSemanaDate = calendar.time
+
+        val listHoy = mutableListOf<EventoEntity>()
+        val listSemana = mutableListOf<EventoEntity>()
+        val listFuturos = mutableListOf<EventoEntity>()
+
         for (evento in eventos) {
             try {
-                val fechaEvento = dateFormat.parse(evento.fecha)
-                
-                if (fechaEvento != null) {
-                    if (evento.fecha == hoy) {
-                        // Evento de hoy
-                        eventosHoy.add(evento)
-                    } else if (fechaEvento.after(inicioSemana) && fechaEvento.before(finSemana)) {
-                        // Evento de esta semana (excluyendo hoy)
-                        eventosSemana.add(evento)
-                    }
+                val fechaEvento = dateFormat.parse(evento.fecha) ?: continue
+
+                if (evento.fecha == hoyStr) {
+                    listHoy.add(evento)
+                } else if (fechaEvento.after(hoyDate) && (fechaEvento.before(finSemanaDate) || fechaEvento == finSemanaDate)) {
+                    listSemana.add(evento)
+                } else if (fechaEvento.after(finSemanaDate)) {
+                    listFuturos.add(evento)
                 }
+                // Los eventos pasados se ignoran en Home, o puedes ponerlos en otro lado.
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
-        
-        return Pair(eventosHoy, eventosSemana)
+
+        return Triple(listHoy, listSemana, listFuturos)
     }
 }

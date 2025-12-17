@@ -46,14 +46,14 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
 
-    // Corrutinas para manejar tareas asíncronas
+    // Corrutinas
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
-    // OkHttp para llamadas HTTP
+    // OkHttp
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
-    
-    // Gson para parsear JSON
+
+    // Gson
     implementation("com.google.code.gson:gson:2.10.1")
 
     // Room Database
@@ -65,4 +65,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    // --- AGREGADO: Librerías para Mapas y Preferencias ---
+    implementation("org.osmdroid:osmdroid-android:6.1.18")
+    implementation("androidx.preference:preference-ktx:1.2.1")
 }

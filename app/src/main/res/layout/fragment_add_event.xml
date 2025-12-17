@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scrollViewAdd"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
@@ -12,7 +13,6 @@
         android:orientation="vertical"
         android:paddingBottom="32dp">
 
-        <!-- Categoría -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,7 +31,6 @@
             app:tabIndicatorColor="@android:color/white"
             app:tabMode="scrollable" />
 
-        <!-- Fecha -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,7 +46,6 @@
             android:focusable="false"
             android:inputType="none" />
 
-        <!-- Hora -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -63,7 +61,6 @@
             android:focusable="false"
             android:inputType="none" />
 
-        <!-- Descripción -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -80,7 +77,6 @@
             android:gravity="top"
             android:inputType="textMultiLine" />
 
-        <!-- Status -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -93,24 +89,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <!-- Ubicación -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ubicación:"
+            android:text="Ubicación (Selecciona en el mapa):"
             android:textStyle="bold"
             android:textColor="@color/fresh_blue_700"
             android:layout_marginTop="16dp" />
+
         <EditText
             android:id="@+id/editUbicacion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Selecciona en el mapa"
-            android:focusable="false"
-            android:clickable="true"
-            android:cursorVisible="false" />
+            android:hint="Toca el mapa o escribe aquí"
+            android:inputType="textPostalAddress"
+            android:layout_marginBottom="8dp"/>
 
-        <!-- Contacto -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            android:layout_marginBottom="8dp">
+
+            <org.osmdroid.views.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </androidx.cardview.widget.CardView>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -127,7 +135,6 @@
             android:clickable="true"
             android:cursorVisible="false" />
 
-        <!-- Recordatorio -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -140,7 +147,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <!-- Botón Guardar -->
         <Button
             android:id="@+id/btnGuardar"
             android:layout_width="match_parent"

@@ -49,9 +49,9 @@ class AlarmScheduler(private val context: Context) {
         val now = System.currentTimeMillis()
         val timeUntilAlarm = triggerTimeMillis - now
         
-        // Solo programar si la alarma es en el futuro (con margen de 1 minuto)
-        if (timeUntilAlarm < 60000) {
-            Log.w(TAG, "Alarma para evento $eventoId ya pasó o es muy pronto (${timeUntilAlarm}ms)")
+        // Solo programar si la alarma no está en el pasado (aceptar alarmas a segundos de ahora)
+        if (timeUntilAlarm < 0) {
+            Log.w(TAG, "Alarma para evento $eventoId ya pasó ( ${timeUntilAlarm}ms ) - no se programa")
             return
         }
         

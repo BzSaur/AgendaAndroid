@@ -2,29 +2,80 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:background="@android:color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
+        android:padding="24dp"
         android:gravity="center_horizontal">
-
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Acerca de esta aplicación"
+            android:text="Proyecto Final"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="@color/fresh_blue_700"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Materia: APLICACIONES MOVILES NATIVAS"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginBottom="24dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/fresh_blue_500"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" ¿Qué hace esta App?"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/fresh_blue_700"
-            android:paddingBottom="12dp" />
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Esta es tu agenda personal inteligente. Sirve para que no se te olviden las cosas importantes."
+            android:textSize="16sp"
+            android:lineSpacingMultiplier="1.2"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Puedes usarla para:\n\n Agendar tareas y exámenes.\n Guardar la ubicación exacta (con mapas) de tus eventos.\n Poner alarmas automáticas.\n Respaldar toda tu información para no perderla nunca."
+            android:textSize="16sp"
+            android:lineSpacingMultiplier="1.2"
+            android:background="#F0F4F8"
+            android:padding="16dp"
+            android:layout_marginBottom="24dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Avances "
-            android:textAlignment="center" />
+            android:text=":)"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp" />
+            
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="16sp"
+            android:layout_marginBottom="40dp" />
+
     </LinearLayout>
 </ScrollView>
