@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Proyecto Final</string>
+
+    <string-array name="status_array">
+        <item>Pendiente</item>
+        <item>Realizado</item>
+        <item>Aplazado</item>
+    </string-array>
+
+    <string-array name="recordatorio_array">
+        <item>Sin recordatorio</item>
+        <item>A la hora del evento</item>
+        <item>5 minutos antes</item>
+        <item>15 minutos antes</item>
+        <item>30 minutos antes</item>
+        <item>1 hora antes</item>
+        <item>1 día antes</item>
+    </string-array>
+</resources>

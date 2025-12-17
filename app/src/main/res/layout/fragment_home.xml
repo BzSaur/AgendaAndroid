@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Sección: Eventos de Hoy -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📅 Eventos de Hoy"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/fresh_blue_700"
+            android:layout_marginBottom="8dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/fresh_blue_500"
+            android:layout_marginBottom="12dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerEventosHoy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
+        <TextView
+            android:id="@+id/txtNoEventosHoy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No hay eventos programados para hoy"
+            android:textAlignment="center"
+            android:textStyle="italic"
+            android:textColor="@android:color/darker_gray"
+            android:padding="16dp"
+            android:visibility="gone" />
+
+        <!-- Divisor -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Sección: Eventos de Esta Semana -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📆 Eventos de Esta Semana"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/fresh_blue_700"
+            android:layout_marginBottom="8dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/fresh_blue_500"
+            android:layout_marginBottom="12dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerEventosSemana"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
+        <TextView
+            android:id="@+id/txtNoEventosSemana"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No hay eventos para esta semana"
+            android:textAlignment="center"
+            android:textStyle="italic"
+            android:textColor="@android:color/darker_gray"
+            android:padding="16dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+</ScrollView>

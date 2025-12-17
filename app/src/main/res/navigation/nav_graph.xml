@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.moviles.proyectofinal.HomeFragment"
+        android:label="Inicio" />
+
+    <fragment
+        android:id="@+id/addEventFragment"
+        android:name="com.moviles.proyectofinal.AddEventFragment"
+        android:label="Añadir Evento" />
+
+    <fragment
+        android:id="@+id/consultFragment"
+        android:name="com.moviles.proyectofinal.ConsultFragment"
+        android:label="Consultar Eventos" />
+
+    <fragment
+        android:id="@+id/backupFragment"
+        android:name="com.moviles.proyectofinal.BackupFragment"
+        android:label="Respaldo" />
+
+    <fragment
+        android:id="@+id/restoreFragment"
+        android:name="com.moviles.proyectofinal.RestoreFragment"
+        android:label="Restaurar" />
+
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.moviles.proyectofinal.AboutFragment"
+        android:label="Acerca de" />
+
+    <fragment
+        android:id="@+id/exitFragment"
+        android:name="com.moviles.proyectofinal.ExitFragment"
+        android:label="Salir" />
+</navigation>

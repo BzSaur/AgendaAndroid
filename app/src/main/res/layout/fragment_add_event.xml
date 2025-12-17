@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="32dp">
+
+        <!-- Categoría -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Categoría:"
+            android:textStyle="bold"
+            android:textColor="@color/fresh_blue_700"
+            android:layout_marginBottom="8dp" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayoutTipo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/fresh_blue_500"
+            app:tabTextColor="@android:color/white"
+            app:tabSelectedTextColor="@android:color/white"
+            app:tabIndicatorColor="@android:color/white"
+            app:tabMode="scrollable" />
+
+        <!-- Fecha -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha:"
+            android:textStyle="bold"
+            android:textColor="@color/fresh_blue_700"
+            android:layout_marginTop="16dp" />
+        <EditText
+            android:id="@+id/editFecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="dd/mm/aaaa"
+            android:focusable="false"
+            android:inputType="none" />
+
+        <!-- Hora -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hora:"
+            android:textStyle="bold"
+            android:textColor="@color/fresh_blue_700"
+            android:layout_marginTop="16dp" />
+        <EditText
+            android:id="@+id/editHora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="--:--"
+            android:focusable="false"
+            android:inputType="none" />
+
+        <!-- Descripción -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descripción:"
+            android:textStyle="bold"
+            android:textColor="@color/fresh_blue_700"
+            android:layout_marginTop="16dp" />
+        <EditText
+            android:id="@+id/editDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Breve descripción"
+            android:minLines="3"
+            android:gravity="top"
+            android:inputType="textMultiLine" />
+
+        <!-- Status -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status:"
+            android:textStyle="bold"
+            android:textColor="@color/fresh_blue_700"
+            android:layout_marginTop="16dp" />
+        <Spinner
+            android:id="@+id/spinnerStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Ubicación -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ubicación:"
+            android:textStyle="bold"
+            android:textColor="@color/fresh_blue_700"
+            android:layout_marginTop="16dp" />
+        <EditText
+            android:id="@+id/editUbicacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Selecciona en el mapa"
+            android:focusable="false"
+            android:clickable="true"
+            android:cursorVisible="false" />
+
+        <!-- Contacto -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contacto:"
+            android:textStyle="bold"
+            android:textColor="@color/fresh_blue_700"
+            android:layout_marginTop="16dp" />
+        <EditText
+            android:id="@+id/editContacto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Selecciona un contacto"
+            android:focusable="false"
+            android:clickable="true"
+            android:cursorVisible="false" />
+
+        <!-- Recordatorio -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recordatorio:"
+            android:textStyle="bold"
+            android:textColor="@color/fresh_blue_700"
+            android:layout_marginTop="16dp" />
+        <Spinner
+            android:id="@+id/spinnerRecordatorio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Botón Guardar -->
+        <Button
+            android:id="@+id/btnGuardar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar Evento"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:backgroundTint="@color/fresh_blue_500"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp" />
+    </LinearLayout>
+</ScrollView>

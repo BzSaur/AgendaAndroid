@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Tabs de tipo de consulta -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabConsulta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/fresh_blue_500"
+            app:tabTextColor="@android:color/white"
+            app:tabSelectedTextColor="@android:color/white"
+            app:tabIndicatorColor="@android:color/white"
+            app:tabMode="fixed"
+            app:tabGravity="fill" />
+
+        <!-- Tabs de tipo de evento -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Categoría:"
+            android:layout_marginTop="16dp"
+            android:textStyle="bold"
+            android:textColor="@color/fresh_blue_700" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabCategoria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/fresh_blue_500"
+            app:tabTextColor="@android:color/white"
+            app:tabSelectedTextColor="@android:color/white"
+            app:tabIndicatorColor="@android:color/white"
+            app:tabMode="scrollable" />
+
+        <!-- === FILTROS === -->
+
+        <!-- Por rango -->
+        <LinearLayout
+            android:id="@+id/layoutRango"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp">
+
+            <EditText
+                android:id="@+id/editFechaInicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Fecha Inicial"
+                android:inputType="none"
+                android:focusable="false" />
+
+            <EditText
+                android:id="@+id/editFechaFinal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Fecha Final"
+                android:inputType="none"
+                android:focusable="false"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+
+        <!-- Por día -->
+        <LinearLayout
+            android:id="@+id/layoutDia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/editFechaDia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Seleccionar día"
+                android:inputType="none"
+                android:focusable="false" />
+        </LinearLayout>
+
+        <!-- Por año -->
+        <LinearLayout
+            android:id="@+id/layoutAnio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selecciona el año:"
+                android:textStyle="bold"
+                android:textColor="@color/fresh_blue_700"
+                android:layout_marginBottom="8dp" />
+
+            <Spinner
+                android:id="@+id/spinnerAnio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp" />
+        </LinearLayout>
+
+        <!-- Por mes -->
+        <LinearLayout
+            android:id="@+id/layoutMes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selecciona el año:"
+                android:textStyle="bold"
+                android:textColor="@color/fresh_blue_700"
+                android:layout_marginBottom="8dp" />
+
+            <Spinner
+                android:id="@+id/spinnerAnioMes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selecciona el mes:"
+                android:textStyle="bold"
+                android:textColor="@color/fresh_blue_700"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="8dp" />
+
+            <Spinner
+                android:id="@+id/spinnerMes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp" />
+        </LinearLayout>
+
+        <!-- Botón Consultar -->
+        <Button
+            android:id="@+id/btnConsultar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Consultar"
+            android:layout_marginTop="16dp" />
+
+        <!-- Tabla simulada -->
+        <TextView
+            android:text="Resultados:"
+            android:textStyle="bold"
+            android:textColor="@color/fresh_blue_700"
+            android:textSize="16sp"
+            android:layout_marginTop="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TableLayout
+            android:id="@+id/tableResultados"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*"
+            android:layout_marginTop="8dp">
+
+            <TableRow android:background="@color/fresh_blue_500" android:padding="8dp">
+                <TextView android:text="Fecha" android:textStyle="bold" android:textColor="@android:color/white"/>
+                <TextView android:text="Hora" android:textStyle="bold" android:textColor="@android:color/white"/>
+                <TextView android:text="Categoría" android:textStyle="bold" android:textColor="@android:color/white"/>
+                <TextView android:text="Status" android:textStyle="bold" android:textColor="@android:color/white"/>
+                <TextView android:text="Descripción" android:textStyle="bold" android:textColor="@android:color/white"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView android:text=""/>
+                <TextView android:text=""/>
+                <TextView android:text=""/>
+                <TextView android:text=""/>
+                <TextView android:text=""/>
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+</ScrollView>

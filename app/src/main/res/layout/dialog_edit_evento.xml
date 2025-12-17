@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar Evento"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/fresh_blue_500"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Fecha (editable) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha:"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+        
+        <EditText
+            android:id="@+id/editEditFecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="YYYY-MM-DD"
+            android:clickable="true"
+            android:focusable="false"
+            android:cursorVisible="false"
+            android:padding="12dp"
+            android:background="@android:drawable/edit_text" />
+
+        <!-- Hora (editable) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hora:"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+        
+        <EditText
+            android:id="@+id/editEditHora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="HH:mm"
+            android:clickable="true"
+            android:focusable="false"
+            android:cursorVisible="false"
+            android:padding="12dp"
+            android:background="@android:drawable/edit_text" />
+
+        <!-- Categoría (editable con TabLayout) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Categoría:"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+        
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayoutEditCategoria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/fresh_blue_100"
+            android:layout_marginBottom="8dp">
+            
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Escuela" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Trabajo" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Casa" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Otro" />
+        </com.google.android.material.tabs.TabLayout>
+
+        <!-- Descripción (editable) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descripción:"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+        
+        <EditText
+            android:id="@+id/editEditDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Descripción del evento"
+            android:minLines="2"
+            android:maxLines="4"
+            android:gravity="top"
+            android:padding="12dp"
+            android:background="@android:drawable/edit_text" />
+
+        <!-- Status (editable con Spinner) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status:"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+        
+        <Spinner
+            android:id="@+id/spinnerEditStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp" />
+
+        <!-- Ubicación (editable con selector) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ubicación:"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+        
+        <EditText
+            android:id="@+id/editEditUbicacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Toca para seleccionar ubicación"
+            android:clickable="true"
+            android:focusable="false"
+            android:cursorVisible="false"
+            android:padding="12dp"
+            android:background="@android:drawable/edit_text" />
+
+        <!-- Contacto (editable) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contacto:"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+        
+        <EditText
+            android:id="@+id/editEditContacto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Contacto"
+            android:padding="12dp"
+            android:background="@android:drawable/edit_text" />
+
+        <!-- Botones -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:gravity="end">
+
+            <Button
+                android:id="@+id/btnCancelar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancelar"
+                android:layout_marginEnd="8dp" />
+
+            <Button
+                android:id="@+id/btnGuardarCambios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Guardar"
+                android:backgroundTint="@color/fresh_blue_500" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
